@@ -1,12 +1,11 @@
-﻿using SandBox.GameComponents;
-using SandBox.Missions.MissionLogics.Arena;
+﻿using SandBox.Missions.MissionLogics.Arena;
 using SandBox.Tournaments.MissionLogics;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
 namespace BluntTournamentWeapons
 {
-    public class BluntTournamentWeaponsDamageModel : SandboxAgentApplyDamageModel
+    public class BluntTournamentWeaponsDamageModel : DefaultAgentApplyDamageModel
     {
         // Disable missiles sticking to targets in tournaments and practice fights.
         public override void DecideMissileWeaponFlags(Agent attackerAgent, MissionWeapon missileWeapon, ref WeaponFlags missileWeaponFlags)
