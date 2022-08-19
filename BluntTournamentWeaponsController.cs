@@ -8,13 +8,14 @@ namespace BluntTournamentWeapons
     [HarmonyPatch(typeof(TournamentFightMissionController), "PrepareForMatch")]
     public class BluntTournamentWeaponsController
     {
+        [HarmonyPriority(Priority.Last)]
         public static void Postfix(TournamentMatch ____match)
         {
             foreach (TournamentTeam team in ____match.Teams)
             {
                 foreach (TournamentParticipant participant in team.Participants)
                 {
-                    for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.ExtraWeaponSlot; index++)
+                    for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.Weapon4; index++)
                     {
                         if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Arrows)
                         {
