@@ -12,9 +12,9 @@ namespace BluntTournamentWeapons
         // Disable melee blood splatters in tournaments and practice fights.
         [HarmonyPostfix]
         [HarmonyPatch("MeleeHitCallback")]
-        internal static void Postfix1(ref HitParticleResultData hitParticleResultData)
+        internal static void Postfix1(Mission __instance, ref HitParticleResultData hitParticleResultData)
         {
-            if (Mission.Current.HasMissionBehavior<TournamentBehavior>() || Mission.Current.HasMissionBehavior<ArenaPracticeFightMissionController>())
+            if (__instance.HasMissionBehavior<TournamentBehavior>() || __instance.HasMissionBehavior<ArenaPracticeFightMissionController>())
             {
                 hitParticleResultData.StartHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
                 hitParticleResultData.ContinueHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
@@ -25,9 +25,9 @@ namespace BluntTournamentWeapons
         // Disable missile blood splatters in tournaments and practice fights.
         [HarmonyPostfix]
         [HarmonyPatch("MissileHitCallback")]
-        internal static void Postfix2(ref int extraHitParticleIndex)
+        internal static void Postfix2(Mission __instance, ref int extraHitParticleIndex)
         {
-            if (Mission.Current.HasMissionBehavior<TournamentBehavior>() || Mission.Current.HasMissionBehavior<ArenaPracticeFightMissionController>())
+            if (__instance.HasMissionBehavior<TournamentBehavior>() || __instance.HasMissionBehavior<ArenaPracticeFightMissionController>())
             {
                 extraHitParticleIndex = -1;
             }
