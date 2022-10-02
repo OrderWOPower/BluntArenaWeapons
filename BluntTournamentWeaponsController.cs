@@ -15,7 +15,7 @@ namespace BluntTournamentWeapons
             {
                 foreach (TournamentParticipant participant in team.Participants)
                 {
-                    for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.Weapon4; index++)
+                    for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.ExtraWeaponSlot; index++)
                     {
                         if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Arrows)
                         {
