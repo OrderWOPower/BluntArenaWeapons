@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
+using TaleWorlds.MountAndBlade.ComponentInterfaces;
 
 namespace BluntTournamentWeapons
 {
@@ -15,7 +17,7 @@ namespace BluntTournamentWeapons
             if (game.GameType is Campaign)
             {
                 CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
-                campaignStarter.AddModel(new BluntTournamentWeaponsDamageModel());
+                campaignStarter.AddModel(new BluntTournamentWeaponsDamageModel((AgentApplyDamageModel)campaignStarter.Models.ToList().FindLast(model => model is AgentApplyDamageModel)));
             }
         }
     }
