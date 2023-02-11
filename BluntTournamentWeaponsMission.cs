@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using SandBox.Missions.MissionLogics.Arena;
-using SandBox.Tournaments.MissionLogics;
 using TaleWorlds.Engine;
 using TaleWorlds.MountAndBlade;
 
@@ -14,7 +13,7 @@ namespace BluntTournamentWeapons
         [HarmonyPatch("MeleeHitCallback")]
         internal static void Postfix1(Mission __instance, ref HitParticleResultData hitParticleResultData)
         {
-            if (__instance.HasMissionBehavior<TournamentBehavior>() || __instance.HasMissionBehavior<ArenaPracticeFightMissionController>())
+            if (__instance.HasMissionBehavior<ArenaAgentStateDeciderLogic>())
             {
                 hitParticleResultData.StartHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
                 hitParticleResultData.ContinueHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
@@ -27,7 +26,7 @@ namespace BluntTournamentWeapons
         [HarmonyPatch("MissileHitCallback")]
         internal static void Postfix2(Mission __instance, ref int extraHitParticleIndex)
         {
-            if (__instance.HasMissionBehavior<TournamentBehavior>() || __instance.HasMissionBehavior<ArenaPracticeFightMissionController>())
+            if (__instance.HasMissionBehavior<ArenaAgentStateDeciderLogic>())
             {
                 extraHitParticleIndex = -1;
             }

@@ -1,9 +1,5 @@
 ﻿using HarmonyLib;
-using System.Linq;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.MountAndBlade.ComponentInterfaces;
 
 namespace BluntTournamentWeapons
 {
@@ -11,14 +7,5 @@ namespace BluntTournamentWeapons
     public class BluntTournamentWeaponsSubModule : MBSubModuleBase
     {
         protected override void OnSubModuleLoad() => new Harmony("mod.bannerlord.blunttournamentweapons").PatchAll();
-
-        protected override void OnGameStart(Game game, IGameStarter gameStarter)
-        {
-            if (game.GameType is Campaign)
-            {
-                CampaignGameStarter campaignStarter = (CampaignGameStarter)gameStarter;
-                campaignStarter.AddModel(new BluntTournamentWeaponsDamageModel((AgentApplyDamageModel)campaignStarter.Models.ToList().FindLast(model => model is AgentApplyDamageModel)));
-            }
-        }
     }
 }
