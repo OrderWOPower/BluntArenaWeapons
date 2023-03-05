@@ -73,6 +73,7 @@
     <Compile Include="BluntTournamentWeaponsController.cs" />
     <Compile Include="BluntTournamentWeaponsMission.cs" />
     <Compile Include="BluntTournamentWeaponsDamageModel.cs" />
+    <Compile Include="BluntTournamentWeaponsMissionBehavior.cs" />
     <Compile Include="BluntTournamentWeaponsSubModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
