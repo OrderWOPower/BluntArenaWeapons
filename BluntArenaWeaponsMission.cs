@@ -1,4 +1,5 @@
-﻿using TaleWorlds.Engine;
+﻿using SandBox.Missions.MissionLogics.Arena;
+using TaleWorlds.Engine;
 using TaleWorlds.MountAndBlade;
 
 namespace BluntArenaWeapons
@@ -6,14 +7,23 @@ namespace BluntArenaWeapons
     public class BluntArenaWeaponsMission
     {
         // Disable melee blood splatters in the arena.
-        internal static void Postfix1(ref HitParticleResultData hitParticleResultData)
+        internal static void Postfix1(Mission __instance, ref HitParticleResultData hitParticleResultData)
         {
-            hitParticleResultData.StartHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
-            hitParticleResultData.ContinueHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
-            hitParticleResultData.EndHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
+            if (__instance.HasMissionBehavior<ArenaAgentStateDeciderLogic>())
+            {
+                hitParticleResultData.StartHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
+                hitParticleResultData.ContinueHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
+                hitParticleResultData.EndHitParticleIndex = ParticleSystemManager.GetRuntimeIdByName("psys_game_sweat_sword_enter");
+            }
         }
 
         // Disable missile blood splatters in the arena.
-        internal static void Postfix2(ref int extraHitParticleIndex) => extraHitParticleIndex = -1;
+        internal static void Postfix2(Mission __instance, ref int extraHitParticleIndex)
+        {
+            if (__instance.HasMissionBehavior<ArenaAgentStateDeciderLogic>())
+            {
+                extraHitParticleIndex = -1;
+            }
+        }
     }
 }
