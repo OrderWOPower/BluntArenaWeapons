@@ -2,6 +2,7 @@
 using SandBox.Tournaments.MissionLogics;
 using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
+using TaleWorlds.ObjectSystem;
 
 namespace BluntArenaWeapons
 {
@@ -17,24 +18,27 @@ namespace BluntArenaWeapons
                 {
                     for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.ExtraWeaponSlot; index++)
                     {
-                        if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Arrows)
+                        Equipment matchEquipment = participant.MatchEquipment;
+                        MBObjectManager objectManager = Game.Current.ObjectManager;
+
+                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Arrows)
                         {
-                            participant.MatchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(Game.Current.ObjectManager.GetObject<ItemObject>("blunt_arrows")));
+                            matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("blunt_arrows")));
                         }
 
-                        if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Bolts)
+                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Bolts)
                         {
-                            participant.MatchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(Game.Current.ObjectManager.GetObject<ItemObject>("blunt_bolts")));
+                            matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("blunt_bolts")));
                         }
 
-                        if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.OneHandedWeapon)
+                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.OneHandedWeapon)
                         {
-                            participant.MatchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(Game.Current.ObjectManager.GetObject<ItemObject>("wooden_sword_t1")));
+                            matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("wooden_sword_t1")));
                         }
 
-                        if (participant.MatchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.TwoHandedWeapon)
+                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.TwoHandedWeapon)
                         {
-                            participant.MatchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(Game.Current.ObjectManager.GetObject<ItemObject>("peasant_maul_t1_2")));
+                            matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("peasant_maul_t1_2")));
                         }
                     }
                 }
