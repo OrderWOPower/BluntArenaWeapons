@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
@@ -17,16 +18,22 @@ namespace BluntArenaWeapons
 
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
-            _harmony.Patch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1")));
-            _harmony.Patch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2")));
-            _harmony.Patch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix")));
+            if (game.GameType is Campaign)
+            {
+                _harmony.Patch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1")));
+                _harmony.Patch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2")));
+                _harmony.Patch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix")));
+            }
         }
 
         public override void OnGameEnd(Game game)
         {
-            _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1"));
-            _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2"));
-            _harmony.Unpatch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix"));
+            if (game.GameType is Campaign)
+            {
+                _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1"));
+                _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2"));
+                _harmony.Unpatch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix"));
+            }
         }
     }
 }
