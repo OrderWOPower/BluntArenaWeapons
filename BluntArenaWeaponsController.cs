@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using SandBox.Tournaments.MissionLogics;
+using System.Linq;
 using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
@@ -12,34 +13,31 @@ namespace BluntArenaWeapons
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(TournamentMatch ____match)
         {
-            foreach (TournamentTeam team in ____match.Teams)
+            foreach (TournamentParticipant participant in ____match.Teams.SelectMany(team => team.Participants))
             {
-                foreach (TournamentParticipant participant in team.Participants)
+                for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.ExtraWeaponSlot; index++)
                 {
-                    for (EquipmentIndex index = EquipmentIndex.WeaponItemBeginSlot; index < EquipmentIndex.ExtraWeaponSlot; index++)
+                    Equipment matchEquipment = participant.MatchEquipment;
+                    MBObjectManager objectManager = Game.Current.ObjectManager;
+
+                    switch (matchEquipment[index].Item?.Type)
                     {
-                        Equipment matchEquipment = participant.MatchEquipment;
-                        MBObjectManager objectManager = Game.Current.ObjectManager;
-
-                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Arrows)
-                        {
+                        case ItemObject.ItemTypeEnum.Arrows:
                             matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("blunt_arrows")));
-                        }
 
-                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.Bolts)
-                        {
+                            break;
+                        case ItemObject.ItemTypeEnum.Bolts:
                             matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("blunt_bolts")));
-                        }
 
-                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.OneHandedWeapon)
-                        {
+                            break;
+                        case ItemObject.ItemTypeEnum.OneHandedWeapon:
                             matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("wooden_sword_t1")));
-                        }
 
-                        if (matchEquipment[index].Item?.Type == ItemObject.ItemTypeEnum.TwoHandedWeapon)
-                        {
+                            break;
+                        case ItemObject.ItemTypeEnum.TwoHandedWeapon:
                             matchEquipment.AddEquipmentToSlotWithoutAgent(index, new EquipmentElement(objectManager.GetObject<ItemObject>("peasant_maul_t1_2")));
-                        }
+
+                            break;
                     }
                 }
             }
