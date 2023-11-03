@@ -10,7 +10,7 @@ namespace BluntArenaWeapons
     [HarmonyPatch(typeof(TournamentFightMissionController), "PrepareForMatch")]
     public class BluntArenaWeaponsController
     {
-        [HarmonyPriority(Priority.Last)]
+        [HarmonyAfter(new string[] { "com.rbmcombat" })]
         public static void Postfix(TournamentMatch ____match)
         {
             foreach (TournamentParticipant participant in ____match.Teams.SelectMany(team => team.Participants))
