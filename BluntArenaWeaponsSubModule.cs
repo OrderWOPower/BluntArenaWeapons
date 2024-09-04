@@ -22,7 +22,6 @@ namespace BluntArenaWeapons
             {
                 _harmony.Patch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1")));
                 _harmony.Patch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2")));
-                _harmony.Patch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), postfix: new HarmonyMethod(AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix")));
             }
         }
 
@@ -32,7 +31,6 @@ namespace BluntArenaWeapons
             {
                 _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MeleeHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix1"));
                 _harmony.Unpatch(AccessTools.Method(typeof(Mission), "MissileHitCallback"), AccessTools.Method(typeof(BluntArenaWeaponsMission), "Postfix2"));
-                _harmony.Unpatch(AccessTools.Method(AccessTools.TypeByName("RBMCombat.Utilities"), "RBMComputeDamage"), AccessTools.Method(typeof(BluntArenaWeaponsUtilities), "Postfix"));
             }
         }
     }
