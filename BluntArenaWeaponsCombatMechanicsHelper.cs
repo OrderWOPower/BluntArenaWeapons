@@ -19,7 +19,7 @@ namespace BluntArenaWeapons
                 }
                 else if (weaponClass == WeaponClass.OneHandedPolearm || weaponClass == WeaponClass.TwoHandedPolearm)
                 {
-                    inflictedDamage *= 8;
+                    inflictedDamage *= 4;
                 }
             }
         }
