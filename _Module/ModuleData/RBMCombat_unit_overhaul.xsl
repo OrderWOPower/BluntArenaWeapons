@@ -32,8 +32,14 @@
 	</xsl:template>
 	<xsl:template match="NPCCharacter[contains(@id,'tournament_template') or contains(@id,'weapon_practice')]/Equipments/EquipmentRoster/equipment[@id='Item.desert_throwing_knife' or @id='Item.highland_throwing_axe_1_t2']/@id">
 		<xsl:attribute name="id">
-			<xsl:value-of select="'Item.throwing_stone_enhanced'"/>
+			<xsl:value-of select="'Item.sling_stoneammo_nonlethal'"/>
 		</xsl:attribute>
+	</xsl:template>
+	<xsl:template match="NPCCharacter[contains(@id,'tournament_template') or contains(@id,'weapon_practice')]/Equipments/EquipmentRoster[equipment/@id='Item.desert_throwing_knife' or equipment/@id='Item.highland_throwing_axe_1_t2']">
+		<xsl:copy>
+			<xsl:apply-templates/>
+			<equipment slot="Item3" id="Item.sling_wool"/>
+		</xsl:copy>
 	</xsl:template>
 	<xsl:template match="NPCCharacter[contains(@id,'tournament_template') or contains(@id,'weapon_practice')]/Equipments/EquipmentRoster/equipment[@id='Item.bodkin_arrows_a' or @id='Item.default_arrows' or @id='Item.tournament_arrows']/@id">
 		<xsl:attribute name="id">
