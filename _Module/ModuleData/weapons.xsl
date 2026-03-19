@@ -48,9 +48,9 @@
 				</ItemComponent>
 				<Flags ForceAttachOffHandPrimaryItemBone="true"/>
 			</Item>
-			<Item id="sling_stoneammo_nonlethal" name="Nonlethal Sling Half-Libra" is_merchandise="false" body_name="bo_sling_ammo" holster_body_name="bo_axe_short" flying_mesh="sling_ammo_flying" mesh="sling_ammo" tier_override="1" holster_mesh="stone_holster" holster_mesh_with_weapon="stone_holster" weight="0.164" appearance="1" Type="SlingStones" item_holsters="throwing_stone:throwing_stone_2">
+			<Item id="sling_stoneammo_nonlethal" name="Nonlethal Sling Ammo" is_merchandise="false" body_name="bo_sling_ammo" holster_body_name="bo_axe_short" flying_mesh="sling_ammo_flying" mesh="sling_ammo" tier_override="1" holster_mesh="stone_holster" holster_mesh_with_weapon="stone_holster" weight="0.12" appearance="1" Type="SlingStones" item_holsters="throwing_stone:throwing_stone_2">
 				<ItemComponent>
-					<Weapon weapon_class="SlingStone" stack_amount="15" physics_material="missile" accuracy="45" thrust_speed="0" speed_rating="0" missile_speed="10" weapon_length="10" thrust_damage="100" thrust_damage_type="Blunt" item_usage="" passby_sound_code="">
+					<Weapon weapon_class="SlingStone" stack_amount="20" physics_material="missile" accuracy="45" thrust_speed="0" speed_rating="0" missile_speed="10" weapon_length="10" thrust_damage="100" thrust_damage_type="Blunt" item_usage="" passby_sound_code="">
 						<WeaponFlags AmmoBreaksOnBounceBack="true" AttachAmmoToVisual="true" Consumable="true" UseHandAsThrowBase="true"/>
 					</Weapon>
 				</ItemComponent>
