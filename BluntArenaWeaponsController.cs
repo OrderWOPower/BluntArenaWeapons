@@ -1,6 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Linq;
+using HarmonyLib;
 using SandBox.Tournaments.MissionLogics;
-using System.Linq;
 using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
